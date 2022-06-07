@@ -1,0 +1,105 @@
+<div class = "card">
+    <div class = "card-header">
+        Agregar venta
+    </div>
+    <div class = "card-body">
+       <form ngNativeValidate [formGroup] = "formularioDeVentas" (ngSubmit) = "enviarDatos()">
+         
+
+           <div class="mb-3">
+            <label for = "" class= "form-label">Producto:</label>
+            <select class="form-select" aria-label="Default select example" (change) = "precio()" formControlName = "idProducto" required>
+              <option value = "0" selected="selected">Selecciona un producto</option>
+              <option *ngFor="let producto of Productos; let iControl=index"  value="{{producto.idProducto}}">{{producto.nombre}} ${{producto.precio}}</option>
+            </select>
+            <label for = "" *ngIf = "cuenta" class= "text-primary text-wrap">No hay cuentas disponibles para este producto</label> 
+            <label for = ""  *ngIf = "!cuenta" class= "text-primary text-wrap">Obligatorio (Seleccione el producto y la cantidad de pantallas que desea)</label>
+          </div>
+
+          
+          <div class="mb-3">
+            <label for = "" class= "form-label">Nombre del cliente: </label>
+            <select class="form-select" aria-label="Default select example" (change) = "clienteSeleccionado()"  formControlName = "idCliente" required>
+              <option value = "0" selected="selected">Selecciona un cliente</option>
+              <option *ngFor="let cliente of Clientes; let iControl=index" value="{{cliente.idCliente}}">{{cliente.nombres}} {{cliente.apellidos}}</option>
+            </select>
+            <div>
+              <a class= "text-info underline" routerLink="/agregar-cliente">¿Quizás deseas agregar un cliente?</a>
+            </div>
+            <label for = "" class= "text-primary">Obligatorio</label>
+           
+          </div>
+
+        
+
+        <div class = "mb-3">
+            <label for = "" class= "form-label" >Cantidad:</label>
+            <input required type= "number" class= "form-control" formControlName = "cantidad" name = "" id = "" aria-describedby="helpId" placeholder = "Digite la cantidad">  
+            <label for = "" class= "text-primary text-wrap">Obligatorio (Por el momento solo poner en cantidad de a 1)</label> 
+        </div>
+
+        <div class = "mb-3">
+            <label for = "" class= "form-label">Observación:</label>
+            <input required type= "text" class= "form-control" formControlName = "observacion" name = "" id = "" aria-describedby="helpId" placeholder = "Observación">   
+            <label for = "" class= "text-primary">Obligatorio</label>
+            
+        <div>
+          <label for = "" *ngIf = "valor" class= "text-primary text-wrap">Saldo menor a lo que se desea comprar</label>
+        </div>
+        </div>
+
+        <div class = "btn-group" role= "group" aria-label = "">
+          
+            <button type= "button" *ngIf = "!cuenta && !valor && !selectProducto && !selectCliente" type = "submit" class= "btn btn-success">Agregar</button>
+            <button type= "button" *ngIf = "cuenta || valor || selectProducto || selectCliente"  class= "btn btn-success" disabled>Agregar</button>
+            
+        </div>
+
+      
+        <div class = "btn-group grupo-boton-2" role= "group" aria-label = "">
+          <button type= "button" routerLink = "/listar-venta" class= "btn btn-primary boton2">Cancelar</button>
+        </div>
+      
+
+
+
+       </form>
+
+    </div>
+
+    <div class = "body" *ngIf="abrirModal">
+      <input type = "checkbox" id = "btn-modal">
+      <div class="contenedor-modal" id = "contenedor-modal">
+        <div class="contenido-modal">
+          <p class = "text-wrap">{{fecha}}</p>
+          <h2 class = "text-wrap">Gracias por tu compra</h2>
+          <img src = "../../../assets/logoPanel.png">
+          <p class = "text-wrap">Es importante no cambiar correo, contraseña. ¡<span>Recuerda</span> utilizar solo un dispositivo por cada pantalla que compres para que no pierdas la garantía del servicio!.</p>
+          <p class = "text-wrap">Producto: {{nombreProducto}}</p>
+          <p class = "text-wrap">Cantidad: {{cantidad}}</p>
+          <p class = "text-wrap">Fecha de expiración: {{fechaExpiracion | date:'dd/MM/yyyy'}}</p>
+          <p class = "text-wrap">Servicio al cliente: <b><i class="fab fa-whatsapp icono-whatsapp"></i></b> +56 9 88134665</p>
+          <p class = "text-wrap">Atendido por:  {{nombreVendedor}}</p>
+          <p class = "text-wrap"><b>{{fechaInicio}}</b></p>
+          <p class = "text-wrap"><i class="fas fa-envelope"></i> Correo: {{correoCuenta}}</p>
+          <p class = "text-wrap"><i class="fas fa-key"></i> Contraseña: {{contrasenaCuenta}}</p>
+          <p class = "text-wrap"><i class="fas fa-users"></i> Perfil: {{perfilCuenta}}</p>
+          <p class = "text-wrap"><i class="fas fa-key"></i> Ping: {{pingCuenta}}</p>
+          
+          <p class = "text-wrap">En caso de queja o reclamo, presentar este comprobante vía WhatsApp a servicio al cliente para solucionar cualquier inconveniente.</p>
+          <!--<p class = "text-wrap"><span>En caso de queja</span> reclamo o garantía por parte del cliente, presentar este comprobante vía whatsapp a soporte técnico para solucionar cualquier inconveniente</p>-->
+          <div class = "linea"></div>
+          <div class = "botones">
+            <div class = "btn-cerrar2" (click) = "downloadPDF()">
+              <label for = "btn-modal">Guardar copia</label>
+            </div>
+          <div class = "btn-cerrar" (click) = "cerrarModal()">
+            <label for = "btn-modal">Cerrar</label>
+          </div>
+         
+        </div>
+        </div>
+
+      </div>
+    </div>
+</div>

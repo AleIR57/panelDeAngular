@@ -1,0 +1,40 @@
+<div class = "info" ><h5>Cuentas totales: {{cantidadCuentas}}</h5><img src = "https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_account_circle_48px-512.png"></div>
+<div class = "info" ><h5>Sin renovar: {{cantidadCuentasNoRenovadas}}</h5><img src = "https://cdn-icons-png.flaticon.com/512/25/25173.png"></div>
+<div class = "card">
+    <div class = "card-header">
+        Cuentas
+        <a class = "btn btn-success" routerLink = "/agregar-cuenta/"><i class="fas fa-plus"></i> Agregar cuenta</a>
+    </div>
+    <div class = "card-body">
+        <table class = "table text-center">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Correo</th>
+                    <th>Contraseña</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha de expiración</th>
+                    <th>Nombre del perfil</th>
+                    <th>Ping</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let cuenta of Cuentas; let iControl = index">
+                    <td *ngFor = "let obj of Productos[iControl]">{{obj.nombre}}</td>
+                    <td>{{cuenta.correo}}</td>
+                    <td>{{cuenta.contrasena}}</td>
+                    <td>{{cuenta.fechaInicio | date:'dd/MM/yyyy, h:mm a'}}</td>
+                    <td>{{cuenta.fechaExpiracion | date:'dd/MM/yyyy, h:mm a'}}</td>
+                    <td>{{cuenta.nombrePerfil}}</td>
+                    <td>{{cuenta.ping}}</td>
+                    <td>{{cuenta.estado}}</td>
+                    <td> <a class = "btn btn-info" routerLink = "/editar-cuenta/{{cuenta.idCuenta}}"><i class="fas fa-edit"></i></a>  | <a name = "" id = "" class = "btn btn-danger" (click)="borrarRegistro(cuenta.idCuenta,iControl)"><i class="fas fa-trash-alt"></i></a> </td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </div>
+</div>

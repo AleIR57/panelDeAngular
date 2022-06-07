@@ -1,0 +1,26 @@
+<div class = "info" ><h5>Productos: {{cantidadProductos}}</h5><img src = "https://cdn-icons-png.flaticon.com/512/98/98667.png"></div>
+<div class = "card">
+    <div class = "card-header">
+        Productos
+        <a class = "btn btn-success" routerLink = "/agregar-producto/"><i class="fas fa-plus"></i> Agregar producto</a>
+    </div>
+    <div class = "card-body">
+        <table class = "table text-center">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of Productos | paginate: {itemsPerPage:8, currentPage:pageActual}; let iControl = index">
+                    <td>{{producto.nombre}}</td>
+                    <td>$ {{producto.precio}}</td>
+                    <td> <a class = "btn btn-info" routerLink = "/editar-producto/{{producto.idProducto}}"><i class="fas fa-edit"></i></a>  | <a name = "" id = "" class = "btn btn-danger" (click)="borrarRegistro(producto.idProducto,iControl)"><i class="fas fa-trash-alt"></i></a> </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+    </div>
+</div>

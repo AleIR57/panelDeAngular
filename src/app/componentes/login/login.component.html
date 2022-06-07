@@ -1,0 +1,31 @@
+
+
+
+<div class = "contenedor-tarjeta">
+
+
+
+<h2 class="text-center">CONEXION PRO ENTERTAINMENT</h2>
+
+
+
+<img src = "../../../assets/logoPanel.png">
+<form [formGroup]="angForm" (ngSubmit)="postdata(angForm)" autocomplete="off" >
+    
+      
+
+<div class="grupo-formulario">
+   
+<label for="email" class = "labelCorreo">Correo: </label>
+<input type="email" name="email" formControlName="email" autocomplete="off" class="form-control input-sm" placeholder="Digite su correo">
+</div>
+
+<div class="form-group">
+<label for="Password">Contraseña:</label>
+<input type="password" name="Password" formControlName="password" autocomplete="off" class="form-control input-sm" placeholder="Digite su contraseña">
+</div>
+<button type="submit" class="btn" >Ingresar </button>
+</form>
+
+
+</div>

@@ -1,0 +1,38 @@
+<div class = "info" ><h5>Colaboradores: {{cantidadColaboradores}}</h5><img src = "https://icon-library.com/images/icon-admin/icon-admin-22.jpg"></div>
+<div class = "card bg-light">
+    <div class = "card-header ">
+        Colaboradores
+        <a class = "btn btn-success" routerLink = "/agregar-vendedor/"><i class="fas fa-plus"></i> Agregar colaborador</a>
+    </div>
+    <div class = "card-body">
+        <table class = "table text-center">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Nombre de usuario</th>
+                    <th>Correo</th>
+                    <th>Número telefónico</th>
+                    <th>Rol</th>
+                    <th>Empresa</th>
+                    <th>Saldo</th>
+                    <th>Créditos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let vendedor of Vendedores; let iControl = index">
+                    <td>{{vendedor.nombre}}</td>
+                    <td>{{vendedor.nombreUsuario}}</td>
+                    <td>{{vendedor.correo}}</td>
+                    <td>{{vendedor.numeroTelefono}}</td>
+                    <td *ngFor = "let obj of Roles[iControl]">{{obj.nombre}}</td>
+                    <td>{{vendedor.empresa}}</td>
+                    <td>$ {{vendedor.saldo}}</td>
+                    <td>$ {{vendedor.creditos}}</td>
+                    <td> <a class = "btn btn-info" routerLink = "/editar-vendedor/{{vendedor.idVendedor}}"><i class="fas fa-edit"></i></a>  | <a name = "" id = "" class = "btn btn-danger" (click)="borrarRegistro(vendedor.idVendedor,iControl)"><i class="fas fa-trash-alt"></i></a> </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
